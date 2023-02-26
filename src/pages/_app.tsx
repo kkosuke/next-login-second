@@ -1,6 +1,15 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+// import { css } from "@emotion/react";
+import Header from "../components/header";
+import type { AppProps } from "next/app";
+import { AuthProvider } from "../context/AuthContext";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+const App = ({ Component, pageProps }: AppProps) => {
+  return (
+    <AuthProvider>
+      <Header />
+      <Component {...pageProps} />
+    </AuthProvider>
+  );
+};
+
+export default App;

@@ -1,11 +1,24 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import styles from "@/styles/Home.module.css";
+import { useAuthContext } from "@/context/AuthContext";
 
-const inter = Inter({ subsets: ['latin'] })
+import { app } from "../lib/firebase";
+import { getAuth, signOut } from "firebase/auth";
+export const logout = (): Promise<void> => {
+  const auth = getAuth(app);
+  return signOut(auth);
+};
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const { user } = useAuthContext();
+  const isLoggedIn = !!user;
+  const handleLogout = (): void => {
+    logout().catch((error) => console.error(error));
+  };
   return (
     <>
       <Head>
@@ -21,12 +34,21 @@ export default function Home() {
             <code className={styles.code}>src/pages/index.tsx</code>
           </p>
           <div>
+            {isLoggedIn ? (
+              <>
+                <button onClick={handleLogout}>ログアウト</button>
+              </>
+            ) : (
+              <>ログインする</>
+            )}
+          </div>
+          <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
               target="_blank"
               rel="noopener noreferrer"
             >
-              By{' '}
+              By{" "}
               <Image
                 src="/vercel.svg"
                 alt="Vercel Logo"
@@ -119,5 +141,5 @@ export default function Home() {
         </div>
       </main>
     </>
-  )
+  );
 }

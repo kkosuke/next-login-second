@@ -40,4 +40,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 # メモ
 - npx create-next-app .
--
+- npm install firebase
+- npm install @emotion/react
+  - https://ralacode.com/blog/post/react-emotion/
+- tsconfig.json を更新
+  - https://zenn.dev/rabbit/articles/6b048ee13d7914
+- yarn add @mui/material @emotion/styled @mui/icons-material
+  - https://zenn.dev/ttani/articles/next-materialui-setup
+- yarn add -D prettier
+- package.jsonを更新
